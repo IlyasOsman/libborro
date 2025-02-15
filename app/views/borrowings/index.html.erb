@@ -1,0 +1,53 @@
+<div class="max-w-4xl mx-auto px-4">
+  
+  <h2 class="text-lg text-gray-700">Logged in as: <%= Current.user.email_address %></h2>
+
+  <h1 class="text-3xl font-bold mb-8">My Borrowed Books</h1>
+  
+  <% if @overdue_borrowings.any? %>
+    <div class="mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+      <h2 class="text-red-800 font-semibold mb-2">Overdue Books</h2>
+      <div class="space-y-4">
+        <% @overdue_borrowings.each do |borrowing| %>
+          <div class="flex items-center justify-between bg-white p-4 rounded shadow-sm">
+            <div>
+              <p class="font-medium text-blue-600 hover:text-blue-800"><%= borrowing.book.title %></p>
+              <p class="text-sm text-red-600">
+                Due: <%= borrowing.due_date.strftime("%B %d, %Y") %>
+                (<%= time_ago_in_words(borrowing.due_date) %> overdue)
+              </p>
+            </div>
+            <%= button_to "Return Book", return_borrowing_path(borrowing),
+                method: :patch,
+                class: "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <div class="space-y-4">
+    <% (@active_borrowings - @overdue_borrowings).each do |borrowing| %>
+      <div class="flex items-center justify-between bg-white p-4 rounded shadow-sm border">
+        <div>
+          <h3 class="font-medium"><%= borrowing.book.title %></h3>
+          <p class="text-sm text-gray-600">
+            Due: <%= borrowing.due_date.strftime("%B %d, %Y") %>
+            (<%= distance_of_time_in_words_to_now(borrowing.due_date) %> remaining)
+          </p>
+        </div>
+        <%= button_to "Return Book", return_borrowing_path(borrowing),
+            method: :patch,
+            class: "px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition" %>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if @active_borrowings.empty? %>
+    <div class="text-center py-8 text-gray-500">
+      <p>You haven't borrowed any books yet.</p>
+      <%= link_to "Browse Available Books", books_path, 
+          class: "inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition" %>
+    </div>
+  <% end %>
+</div>
