@@ -1,24 +1,57 @@
-# README
+# Libborro: Book Lending Library
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Libborro is a Rails 8 application for book lending, tracking borrowings, and returning books. The application uses TailwindCSS for styling.
 
-Things you may want to cover:
+## 🚀 Features
 
-* Ruby version
+*   User authentication
+*   View, Borrow and return books
+*   Track overdue books
 
-* System dependencies
+## 🛠️ Prerequisites
 
-* Configuration
+*   Ruby 3.2+
+*   Rails 8+
+*   Git
 
-* Database creation
+## 💻 Setup Instructions
 
-* Database initialization
+1.  Clone the repository:
 
-* How to run the test suite
+    ```bash
+    git clone [https://github.com/ilyasosman/libborro.git](https://github.com/ilyasosman/libborro.git)
+    cd libborro
+    ```
 
-* Services (job queues, cache servers, search engines, etc.)
+2.  Install dependencies:
 
-* Deployment instructions
+    ```bash
+    bundle install
+    ```
 
-* ...
+3.  Set up the database:
+
+    ```bash
+    bin/rails db:create db:migrate db:seed
+    ```
+
+4.  Run the server:
+
+    ```bash
+    bin/rails server
+    ```
+
+5.  Access the application at http://localhost:3000.
+
+## ✅ Running Tests
+
+Run all the tests:
+
+```bash
+bin/rails test
+```
+
+Run linting:
+
+```bash
+rubocop
