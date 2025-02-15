@@ -15,7 +15,7 @@ class User < ApplicationRecord
                                   if: :password_required?
   validate :password_matches_confirmation, if: :password_required?
 
-  
+
   private
 
   def normalize_email

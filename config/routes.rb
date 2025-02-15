@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Authentication with new Rails 8 authentication system
   resource :session
   resources :passwords, param: :token

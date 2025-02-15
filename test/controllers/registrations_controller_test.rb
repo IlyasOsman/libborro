@@ -17,7 +17,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create new user with valid params" do
-    assert_difference('User.count') do
+    assert_difference("User.count") do
       post registration_path, params: @new_user_params
     end
     assert_redirected_to root_path
@@ -26,7 +26,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create user with invalid email" do
     @new_user_params[:user][:email_address] = "invalid_email"
-    assert_no_difference('User.count') do
+    assert_no_difference("User.count") do
       post registration_path, params: @new_user_params
     end
     assert_response :unprocessable_entity
@@ -36,7 +36,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "should not create user with existing email" do
     existing_user = users(:one)
     @new_user_params[:user][:email_address] = existing_user.email_address
-    assert_no_difference('User.count') do
+    assert_no_difference("User.count") do
       post registration_path, params: @new_user_params
     end
     assert_response :unprocessable_entity
@@ -45,7 +45,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create user with mismatched passwords" do
     @new_user_params[:user][:password_confirmation] = "different123"
-    assert_no_difference('User.count') do
+    assert_no_difference("User.count") do
       post registration_path, params: @new_user_params
     end
     assert_response :unprocessable_entity

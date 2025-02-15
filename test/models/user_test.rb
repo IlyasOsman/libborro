@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   ### Validation Tests ###
-  
+
   test "should be valid with valid attributes" do
     assert @user.valid?
   end
@@ -73,7 +73,7 @@ class UserTest < ActiveSupport::TestCase
   test "should destroy associated sessions when user is destroyed" do
     user = users(:one)
     user.sessions.create!
-    assert_difference('Session.count', -1) do
+    assert_difference("Session.count", -1) do
       user.destroy
     end
   end
