@@ -19,7 +19,7 @@ Libborro is a Rails 8 application for book lending, tracking borrowings, and ret
 1.  Clone the repository:
 
     ```bash
-    git clone [https://github.com/ilyasosman/libborro.git](https://github.com/ilyasosman/libborro.git)
+    git clone git@github.com:IlyasOsman/libborro.git
     cd libborro
     ```
 
