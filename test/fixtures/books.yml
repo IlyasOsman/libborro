@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Test Book
+  author: Test Author
+  isbn: "978-0-13-134135-4"
+
+two: 
+  title: Second Test Book
+  author: Another Author
+  isbn: "978-0-13-134135-5"
+
+borrowed:
+  title: Borrowed Book
+  author: Another Author
+  isbn: "978-0-13-134135-6"
+
+available:
+  title: Available Book
+  author: Third Author
+  isbn: "978-0-13-134135-7"
