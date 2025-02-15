@@ -16,4 +16,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "books#index"
+
+   # Main resources
+   resources :books, only: [ :index, :show ] do
+    collection do
+      get "search"
+    end
+  end
+
+  # Borrowings with simplified routes
+  resources :borrowings, only: [ :index, :create ] do
+    member do
+      patch :return
+    end
+  end
 end
