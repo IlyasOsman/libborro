@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :borrowings, dependent: :destroy
+  has_many :books, through: :borrowings
 
   # Email normalization before validation
   before_validation :normalize_email
@@ -15,6 +17,9 @@ class User < ApplicationRecord
                                   if: :password_required?
   validate :password_matches_confirmation, if: :password_required?
 
+  def active_borrowings
+    borrowings.active.includes(:book)
+  end
 
   private
 

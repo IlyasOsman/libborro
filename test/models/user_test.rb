@@ -1,13 +1,6 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-end
-require "test_helper"
-
-class UserTest < ActiveSupport::TestCase
   setup do
     @user = User.new(
       email_address: "test@example.com",
@@ -76,5 +69,18 @@ class UserTest < ActiveSupport::TestCase
     assert_difference("Session.count", -1) do
       user.destroy
     end
+  end
+
+  test "should destroy associated borrowings when user is destroyed" do
+    user = users(:one)
+    assert_difference("Borrowing.count", -user.borrowings.count) do
+      user.destroy
+    end
+  end
+
+  test "active_borrowings should return only non-returned borrowings" do
+    user = users(:one)
+    active_count = user.borrowings.where(returned: false).count
+    assert_equal active_count, user.active_borrowings.count
   end
 end
