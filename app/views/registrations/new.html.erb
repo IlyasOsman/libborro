@@ -1,0 +1,58 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <% if notice = flash[:notice] %>
+    <div class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <h1 class="font-bold text-4xl mb-6">Sign up</h1>
+
+  <%= form_with model: @user, url: registration_path, class: "contents" do |form| %>
+    <div class="my-5">
+      <%= form.label :email_address, "Email address", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.email_field :email_address, 
+          required: true, 
+          autofocus: true, 
+          autocomplete: "username", 
+          placeholder: "you@example.com", 
+          class: "block shadow rounded-md border #{@user.errors[:email_address].any? ? 'border-red-400' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full focus:ring-2 focus:ring-blue-500" %>
+      <% if @user.errors[:email_address].any? %>
+        <p class="mt-1 text-sm text-red-500"><%= @user.errors[:email_address].to_sentence %></p>
+      <% end %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :password, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.password_field :password, 
+          required: true, 
+          autocomplete: "new-password", 
+          placeholder: "At least 6 characters", 
+          maxlength: 72, 
+          class: "block shadow rounded-md border #{@user.errors[:password].any? ? 'border-red-400' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full focus:ring-2 focus:ring-blue-500" %>
+      <% if @user.errors[:password].any? %>
+        <p class="mt-1 text-sm text-red-500"><%= @user.errors[:password].to_sentence %></p>
+      <% end %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :password_confirmation, "Confirm password", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.password_field :password_confirmation, 
+          required: true, 
+          autocomplete: "new-password", 
+          placeholder: "Re-enter your password", 
+          maxlength: 72, 
+          class: "block shadow rounded-md border #{@user.errors[:password_confirmation].any? ? 'border-red-400' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full focus:ring-2 focus:ring-blue-500" %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <p class="mt-1 text-sm text-red-500"><%= @user.errors[:password_confirmation].to_sentence %></p>
+      <% end %>
+    </div>
+
+    <div class="sm:flex sm:items-center sm:gap-4">
+      <%= form.submit "Create account", class: "w-full sm:w-auto rounded-lg py-3 px-5 bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+      <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+        Already have an account?
+        <%= link_to "Sign in", new_session_path, class: "text-blue-600 hover:text-blue-700 font-medium" %>
+      </p>
+    </div>
+  <% end %>
+</div>
